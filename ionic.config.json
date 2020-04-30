@@ -1,0 +1,7 @@
+{
+  "name": "halstead",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
