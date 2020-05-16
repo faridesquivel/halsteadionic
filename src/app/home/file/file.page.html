@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      Cargar archivo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ngx-dropzone class="customDrop" (change)="onSelect($event)">
+    <ngx-dropzone-label>Da CLICK AQUÍ para seleccionar un archivo Python<ion-icon class="icon" name="arrow-down-circle-outline"></ion-icon></ngx-dropzone-label>
+    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+        <ngx-dropzone-label class="inside">{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+    </ngx-dropzone-preview>
+  </ngx-dropzone>
+  <ion-row *ngIf="files.length">
+    <ion-col size="12" class="ion-padding ion-text-center">
+      <ion-text color="tertiary">Archivo cargado exitosamente, puedes cargar más archivos o dirigirte a la pestaña <ion-icon color="primary" name="analytics"></ion-icon> para ver las métricas</ion-text>
+    </ion-col>
+  </ion-row>
+</ion-content>

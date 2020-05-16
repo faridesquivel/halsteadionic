@@ -1,0 +1,34 @@
+.block {
+    display: block;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.title2 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.name {
+    font-size: 22px;
+}
+
+.card{
+    height: 300px;
+    width: 300px;
+    margin: 1px 4px !important;
+}
+
+.horizontalScroll {
+    max-height: 200px;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.marginTop {
+    margin-top: 5vh;
+}

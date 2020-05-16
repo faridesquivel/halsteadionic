@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      Guardados
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row *ngIf="!savedPrograms.length">
+    <ion-col size="12">
+      <ion-row>
+        <ion-col size="12">
+          <ion-card class="analizedCard">
+            <ion-card-header class="ion-text-center">
+              <strong>¡No tienes programas guardados!</strong>
+            </ion-card-header>
+            <ion-card-content class="cardWithOverflow" class="ion-justify-content-center">
+              <ion-text class="block">Para guardar uno, por favor selecciona un programa en la pestaña <ion-icon color="dark" name="document"></ion-icon></ion-text>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="savedPrograms.length">
+    <ion-col size="12" *ngFor="let prog of savedPrograms; let i = index;">
+      <ion-row>
+        <ion-col size="12">
+          <ion-card class="analizedCard">
+            <ion-card-header class="ion-text-center">
+              <strong *ngIf="savedPrograms.length === 1">Programa #{{(i + 1)}}</strong>
+            </ion-card-header>
+            <ion-card-content class="cardWithOverflow" class="ion-justify-content-center">
+              <ion-text class="block" *ngFor="let line of prog">{{ line }}<br></ion-text>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-button expland="block" (click)="deleteSaved()">Eliminar guardados</ion-button>
+  </ion-row>
+</ion-content>
