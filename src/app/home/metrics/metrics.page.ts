@@ -24,10 +24,18 @@ export class MetricsPage implements OnInit {
   ngOnInit() {
   }
 
+  getMetrics(array) {
+    for (const iterator of array) {
+      
+    }
+  }
+
   ionViewWillEnter() {
     this.filesService.programs.subscribe((data) => {
       this.allPrograms = data;
-      console.log('Los programas son: ', data);
+      if (this.allPrograms) {
+        this.getMetrics(this.allPrograms);
+      }
     });
   }
 
