@@ -13,6 +13,9 @@ export class SavedPage implements OnInit {
   ) { }
 
   async ngOnInit() {
+  }
+
+  async ionViewWillEnter() {
     try {
       await this.fileService.fetchPrograms();
       this.fileService.savedPrograms.subscribe((data) => {

@@ -22,7 +22,9 @@ export class MetricsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('OnInit Metrics');
+  }
+
+  ionViewWillEnter() {
     this.filesService.programs.subscribe((data) => {
       this.allPrograms = data;
       console.log('Los programas son: ', data);

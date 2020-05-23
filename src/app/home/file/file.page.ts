@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilesService } from '../../providers/files.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-file',
@@ -19,7 +20,8 @@ export class FilePage implements OnInit {
   showTable = true;
   table = [];
   constructor(
-    private filesService: FilesService
+    private filesService: FilesService,
+    private navController: NavController
   ) { }
 
   ngOnInit() {
@@ -43,8 +45,9 @@ export class FilePage implements OnInit {
         });
         console.log('Will push all lines into programs', this.allLines);
         this.allPrograms.push(this.allLines);
-        this.filesService.setPrograms(this.allPrograms);
-        console.log('PROGRAMAS SON: ', this.allPrograms);
+        this.filesService.setPrograms(this.allPrograms).then(() => {
+          this.navController.navigateForward('/home/tabs/code');
+        });
       };
 
       reader.onerror = (ev) => {

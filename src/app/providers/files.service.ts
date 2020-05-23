@@ -42,7 +42,10 @@ export class FilesService {
 
   setPrograms(programs: any) {
     console.log('Will set files: ', programs);
-    this._programs.next(programs);
+    return new Promise((resolve) => {
+      this._programs.next(programs);
+      resolve();
+    });
   }
 
   saveMetric(prog) {
@@ -53,6 +56,7 @@ export class FilesService {
                 console.log('Programas guardados: ', savedPrograms);
                 const newPrograms = [...JSON.parse(savedPrograms), prog];
                 console.log(newPrograms);
+                this._savedPrograms.next(newPrograms);
                 return this.storage.set('programs', JSON.stringify(newPrograms)).then(() => resolve()).catch((err) => reject(err));
             }
             return this.storage.set('programs', JSON.stringify([prog])).then(() => resolve()).catch((err) => reject());
