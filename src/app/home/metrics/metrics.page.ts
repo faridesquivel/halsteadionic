@@ -20,6 +20,9 @@ export class MetricsPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.filesService.programs.subscribe((data) => {
+      this.allPrograms = data;
+    });
   }
 
   isStart(line) {
@@ -48,12 +51,9 @@ export class MetricsPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.filesService.programs.subscribe((data) => {
-      this.allPrograms = data;
-      if (this.allPrograms && this.n1[0].N1 <= 1) {
-        this.getMetrics(this.allPrograms);
-      }
-    });
+    if (this.allPrograms && !(this.n1.length > 1)) {
+      this.getMetrics(this.allPrograms);
+    }
   }
 
   saveProgram(prog) {
