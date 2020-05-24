@@ -8,17 +8,9 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./file.page.scss'],
 })
 export class FilePage implements OnInit {
-
   allLines: string[] = [];
   allPrograms: any[] = [];
-  allWords: string[] = [];
   files: File[] = [];
-  selectedFile: File;
-  showOperadoresTable = true;
-  showOperandosTable = true;
-  showFileSelector = true;
-  showTable = true;
-  table = [];
   constructor(
     private filesService: FilesService,
     private navController: NavController

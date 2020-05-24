@@ -39,26 +39,26 @@
                 N1
               </ion-col>
             </ion-row>
-            <ion-row *ngFor="let lin of table" class="rows">
+            <ion-row *ngFor="let op of n1; let i = index" class="rows">
               <ion-col>
-                {{ lin && lin.address }}
+                {{ i }}
               </ion-col>
               <ion-col>
-                {{ lin && lin.symbol }}
+                {{ op && op.operadores }}
               </ion-col>
               <ion-col>
-                {{ lin && lin.type }}
+                {{ op && op.N1 }}
               </ion-col>
             </ion-row>
             <ion-row class="header">
               <ion-col>
-                0
+                {{ n1.length }}
               </ion-col>
               <ion-col>
                 TOTAL
               </ion-col>
               <ion-col>
-                0
+                {{ (0 + op.N1) }}
               </ion-col>
             </ion-row>
           </ion-grid>

@@ -8,13 +8,11 @@ import { AlertController, LoadingController } from '@ionic/angular';
   styleUrls: ['./metrics.page.scss'],
 })
 export class MetricsPage implements OnInit {
-  allLines: string[] = [];
+  n1 = [{ operadores: [], N1: 0 }];
+  n2 = [];
+  N1 = [];
+  N2 = [];
   allPrograms = [];
-  showOperadoresTable = true;
-  showOperandosTable = true;
-  showFileSelector = true;
-  showTable = true;
-  table = [];
   constructor(
     private filesService: FilesService,
     private alertController: AlertController,
@@ -24,16 +22,35 @@ export class MetricsPage implements OnInit {
   ngOnInit() {
   }
 
+  isStart(line) {
+    return /def/gm.test(line);
+  }
+
+  isEnd(line) {
+    return /return/gm.test(line);
+  }
+
+  analizeLine(line) {
+    if (this.isStart(line)) {
+      this.n1[0].operadores.push('def');
+      this.n1[0].N1 = this.n1[0].N1 + 1;
+    }
+  }
+
   getMetrics(array) {
     for (const iterator of array) {
-      
+      console.log(`Will iterate: ${iterator}`);
+      for (const it2 of iterator) {
+        console.log('La linea del iterador es: ', it2);
+        this.analizeLine(it2);
+      }
     }
   }
 
   ionViewWillEnter() {
     this.filesService.programs.subscribe((data) => {
       this.allPrograms = data;
-      if (this.allPrograms) {
+      if (this.allPrograms && this.n1[0].N1 <= 1) {
         this.getMetrics(this.allPrograms);
       }
     });
