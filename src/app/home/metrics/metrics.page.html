@@ -58,7 +58,7 @@
                 TOTAL
               </ion-col>
               <ion-col>
-                0
+                {{ getTotalOfN1() }}
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -78,26 +78,26 @@
                 N2
               </ion-col>
             </ion-row>
-            <ion-row *ngFor="let lin of table" class="rows">
+            <ion-row *ngFor="let op2 of n2; let j = index;" class="rows">
               <ion-col>
-                {{ lin && lin.address }}
+                {{ (j + 1) }}
               </ion-col>
               <ion-col>
-                {{ lin && lin.symbol }}
+                {{ op2 && op2.operando }}
               </ion-col>
               <ion-col>
-                {{ lin && lin.type }}
+                {{ op2 && op2.N2 }}
               </ion-col>
             </ion-row>
             <ion-row class="header">
               <ion-col>
-                0
+                {{ n2.length }}
               </ion-col>
               <ion-col>
                 TOTAL
               </ion-col>
               <ion-col>
-                0
+                {{ getTotalOfN2() }}
               </ion-col>
             </ion-row>
           </ion-grid>

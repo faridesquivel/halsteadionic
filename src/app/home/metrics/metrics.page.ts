@@ -32,6 +32,22 @@ export class MetricsPage implements OnInit {
     return /return/gm.test(line);
   }
 
+  getTotalOfN1(): number {
+    let total = 0;
+    for (const iterator of this.n1) {
+      total = total + iterator.N1;
+    }
+    return total;
+  }
+
+  getTotalOfN2(): number {
+    let total = 0;
+    for (const iterator of this.n2) {
+      total = total + iterator.N2;
+    }
+    return total;
+  }
+
   n1HasStart() {
     for (let index = 0; index < this.n1.length; index++) {
       if (this.n1[index].operadores.includes('def') || this.n1[index].operadores.includes('return')) {
@@ -75,6 +91,104 @@ export class MetricsPage implements OnInit {
     for (let index = 0; index < this.n1.length; index++) {
       if (this.n1[index].operadores.includes('while')) {
          return index;
+      }
+    }
+    return -1;
+  }
+
+  isHigher(line) {
+    return />/gm.test(line);
+  }
+
+  n1HasHigher() {
+    for (let index = 0; index < this.n1.length; index++) {
+      if (this.n1[index].operadores.includes('>')) {
+         return index;
+      }
+    }
+    return -1;
+  }
+
+  isBrackets(line) {
+    return /\((.*?)\)/gm.test(line);
+  }
+
+  n1HasBrackets() {
+    for (let index = 0; index < this.n1.length; index++) {
+      if (this.n1[index].operadores.includes('()')) {
+         return index;
+      }
+    }
+    return -1;
+  }
+
+  isComma(line) {
+    return /,/gm.test(line);
+  }
+
+  n1HasComma() {
+    for (let index = 0; index < this.n1.length; index++) {
+      if (this.n1[index].operadores.includes(',')) {
+         return index;
+      }
+    }
+    return -1;
+  }
+
+  isLess(line) {
+    return /-/gm.test(line);
+  }
+
+  n1HasLess() {
+    for (let index = 0; index < this.n1.length; index++) {
+      if (this.n1[index].operadores.includes('-')) {
+         return index;
+      }
+    }
+    return -1;
+  }
+
+  isPlus(line) {
+    return /\+/gm.test(line);
+  }
+
+  n1HasPlus() {
+    for (let index = 0; index < this.n1.length; index++) {
+      if (this.n1[index].operadores.includes('+')) {
+         return index;
+      }
+    }
+    return -1;
+  }
+
+
+  isVariable(line) {
+    const result = line.match(/[a-zA-Z]{1}[a-zA-Z0-9]{0,9}|\b\d+\b/g);
+    return result;
+  }
+
+  saveVariables(array) {
+    for (const iterator of array) {
+      if (!this.isStart(iterator) && !this.isEnd(iterator) && !this.isWhile(iterator)) {
+        console.log('Will save in n2', iterator);
+        const index = this.n2OperatorExists(iterator);
+        if (index !== -1) {
+          this.n2[index].N2++;
+        } else {
+          const newStart = {
+            operando: [`${iterator}`],
+            N2: 1
+          };
+          this.n2.push(newStart);
+        }
+      }
+    }
+  }
+
+  n2OperatorExists(op) {
+    for (let index = 0; index < this.n2.length; index++) {
+      if (this.n2[index].operando.includes(op)) {
+        return index;
       }
     }
     return -1;
@@ -141,6 +255,72 @@ export class MetricsPage implements OnInit {
         this.n1.push(newStart);
       }
     }
+    if (this.isHigher(line)) {
+      const index = this.n1HasHigher();
+      if (index !== -1) {
+        this.n1[index].N1++;
+      } else {
+        const newStart = {
+          operadores: ['>'],
+          N1: 1
+        };
+        this.n1.push(newStart);
+      }
+    }
+    if (this.isPlus(line)) {
+      const index = this.n1HasPlus();
+      if (index !== -1) {
+        this.n1[index].N1++;
+      } else {
+        const newStart = {
+          operadores: ['+'],
+          N1: 1
+        };
+        this.n1.push(newStart);
+      }
+    }
+    if (this.isLess(line)) {
+      const index = this.n1HasLess();
+      if (index !== -1) {
+        this.n1[index].N1++;
+      } else {
+        const newStart = {
+          operadores: ['-'],
+          N1: 1
+        };
+        this.n1.push(newStart);
+      }
+    }
+    if (this.isComma(line)) {
+      const index = this.n1HasComma();
+      if (index !== -1) {
+        this.n1[index].N1++;
+      } else {
+        const newStart = {
+          operadores: [','],
+          N1: 1
+        };
+        this.n1.push(newStart);
+      }
+    }
+    if (this.isBrackets(line)) {
+      const index = this.n1HasBrackets();
+      if (index !== -1) {
+        this.n1[index].N1++;
+      } else {
+        const newStart = {
+          operadores: ['()'],
+          N1: 1
+        };
+        this.n1.push(newStart);
+      }
+    }
+    const extracted = this.isVariable(line);
+    console.log('Result from isVARIABLE: ', extracted);
+    if (extracted.length) {
+      this.saveVariables(extracted);
+    }
+    console.log('Final: ', this.n2);
   }
 
   getMetrics(array) {
