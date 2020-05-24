@@ -41,7 +41,7 @@
             </ion-row>
             <ion-row *ngFor="let op of n1; let i = index" class="rows">
               <ion-col>
-                {{ i }}
+                {{ (i + 1) }}
               </ion-col>
               <ion-col>
                 {{ op && op.operadores }}
@@ -58,13 +58,13 @@
                 TOTAL
               </ion-col>
               <ion-col>
-                {{ (0 + op.N1) }}
+                0
               </ion-col>
             </ion-row>
           </ion-grid>
         </ion-card>
       </ion-row>
-      <ion-row *ngIf="showOperandosTable">
+      <ion-row>
         <ion-card class="widthExp">
           <ion-grid class="tableGrid">
             <ion-row class="header">

@@ -8,10 +8,9 @@ import { AlertController, LoadingController } from '@ionic/angular';
   styleUrls: ['./metrics.page.scss'],
 })
 export class MetricsPage implements OnInit {
-  n1 = [{ operadores: [], N1: 0 }];
+  n1 = [];
   n2 = [];
-  N1 = [];
-  N2 = [];
+  expressions = [',', ':', '=', 'while', '>', '+', 'while', '-', ',', '()'];
   allPrograms = [];
   constructor(
     private filesService: FilesService,
@@ -33,10 +32,114 @@ export class MetricsPage implements OnInit {
     return /return/gm.test(line);
   }
 
+  n1HasStart() {
+    for (let index = 0; index < this.n1.length; index++) {
+      if (this.n1[index].operadores.includes('def') || this.n1[index].operadores.includes('return')) {
+         return index;
+      }
+    }
+    return -1;
+  }
+
+  isEqual(line) {
+    return /=/gm.test(line);
+  }
+
+  n1HasEqual() {
+    for (let index = 0; index < this.n1.length; index++) {
+      if (this.n1[index].operadores.includes('=')) {
+         return index;
+      }
+    }
+    return -1;
+  }
+
+  isTwoPoints(line) {
+    return /:/gm.test(line);
+  }
+
+  n1HasTwoPoints() {
+    for (let index = 0; index < this.n1.length; index++) {
+      if (this.n1[index].operadores.includes(':')) {
+         return index;
+      }
+    }
+    return -1;
+  }
+
+  isWhile(line) {
+    return /while/gm.test(line);
+  }
+
+  n1HasWhile() {
+    for (let index = 0; index < this.n1.length; index++) {
+      if (this.n1[index].operadores.includes('while')) {
+         return index;
+      }
+    }
+    return -1;
+  }
+
   analizeLine(line) {
     if (this.isStart(line)) {
-      this.n1[0].operadores.push('def');
-      this.n1[0].N1 = this.n1[0].N1 + 1;
+      const index = this.n1HasStart();
+      if (index !== -1) {
+        this.n1[index].operadores.push('def');
+      } else {
+        const newStart = {
+          operadores: ['def'],
+          N1: 1
+        };
+        this.n1.unshift(newStart);
+      }
+    }
+    if (this.isEnd(line)) {
+      const index = this.n1HasStart();
+      if (index !== -1) {
+        this.n1[index].operadores.push('return');
+      } else {
+        const newStart = {
+          operadores: ['return'],
+          N1: 1
+        };
+        this.n1.unshift(newStart);
+      }
+    }
+    if (this.isEqual(line)) {
+      const index = this.n1HasEqual();
+      if (index !== -1) {
+        this.n1[index].N1++;
+      } else {
+        const newStart = {
+          operadores: ['='],
+          N1: 1
+        };
+        this.n1.push(newStart);
+      }
+    }
+    if (this.isTwoPoints(line)) {
+      const index = this.n1HasTwoPoints();
+      if (index !== -1) {
+        this.n1[index].N1++;
+      } else {
+        const newStart = {
+          operadores: [':'],
+          N1: 1
+        };
+        this.n1.push(newStart);
+      }
+    }
+    if (this.isWhile(line)) {
+      const index = this.n1HasWhile();
+      if (index !== -1) {
+        this.n1[index].N1++;
+      } else {
+        const newStart = {
+          operadores: ['while'],
+          N1: 1
+        };
+        this.n1.push(newStart);
+      }
     }
   }
 
@@ -51,7 +154,7 @@ export class MetricsPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    if (this.allPrograms && !(this.n1.length > 1)) {
+    if (this.allPrograms && !this.n1.length) {
       this.getMetrics(this.allPrograms);
     }
   }
