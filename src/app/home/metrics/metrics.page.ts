@@ -12,6 +12,7 @@ export class MetricsPage implements OnInit {
   n2 = [];
   expressions = [',', ':', '=', 'while', '>', '+', 'while', '-', ',', '()'];
   allPrograms = [];
+  math = Math;
   constructor(
     private filesService: FilesService,
     private alertController: AlertController,

@@ -64,6 +64,7 @@
           </ion-grid>
         </ion-card>
       </ion-row>
+
       <ion-row>
         <ion-card class="widthExp">
           <ion-grid class="tableGrid">
@@ -103,6 +104,51 @@
           </ion-grid>
         </ion-card>
       </ion-row>
+
+      <ion-row>
+        <ion-card class="widthExp">
+          <ion-card-header color="warning" class="ion-text-center">Derivadas</ion-card-header>
+          <ion-grid class="tableGrid">
+            <ion-row>
+              <p class="deriv">No. de operadores = n1: {{ n1.length }}</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">Total de operadores = N1: {{ getTotalOfN1() }}</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">No. de operandos = n2: {{ n2.length }}</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">Total de operandos = N2: {{ getTotalOfN2() }}</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">Longitud del programa = N: {{ (getTotalOfN1() + getTotalOfN2()) }}</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">Vocabulario del programa = n: {{ (n1.length + n2.length) }}</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">Volumen = V: {{ (getTotalOfN1() + getTotalOfN2()) * math.log2((n1.length + n2.length)) }}</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">Dificultad = D: {{ (n1.length/2) * (getTotalOfN2()/n2.length) }}</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">Nivel = L: {{ 1/((n1.length/2) * (getTotalOfN2()/n2.length)) }}</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">Esfuerzo = E: {{ ((n1.length/2) * (getTotalOfN2()/n2.length)) * (getTotalOfN1() + getTotalOfN2()) * math.log2((n1.length + n2.length)) }}</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">Tiempo = T: {{ (((n1.length/2) * (getTotalOfN2()/n2.length)) * (getTotalOfN1() + getTotalOfN2()) * math.log2((n1.length + n2.length)))/18 }} segundos</p>
+            </ion-row>
+            <ion-row>
+              <p class="deriv">Bugs = B: {{ math.pow(((((n1.length/2) * (getTotalOfN2()/n2.length)) * (getTotalOfN1() + getTotalOfN2()) * math.log2((n1.length + n2.length)))/18), 0.66)/3000 }} segundos</p>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-row>
+
       <ion-button expand="block" (click)="saveProgram(prog)">Guardar Métricas</ion-button>
     </ion-col>
   </ion-row>
