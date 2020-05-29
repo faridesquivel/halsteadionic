@@ -25,6 +25,10 @@ const routes: Routes = [
       {
         path: 'saved',
         loadChildren: () => import('./saved/saved.module').then( m => m.SavedPageModule)
+      },
+      {
+        path: 'view-program/:index',
+        loadChildren: () => import('./view-program/view-program.module').then( m => m.ViewProgramPageModule)
       }
     ]
   },

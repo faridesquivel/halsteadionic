@@ -3,16 +3,6 @@
     <ion-title class="ion-text-center">
       Menú Principal
     </ion-title>
-    <!-- <ion-buttons slot="end">
-      <ion-button
-        (click)="onShowFileSelectorChange()"
-        routerLinkActive="router-link-active"
-        *ngIf="!showFileSelector"
-        color="primary"
-      >
-        Cargar Otro Archivosudo 
-      </ion-button>
-    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -21,7 +11,7 @@
     <ion-row class="ion-padding marginTop">
       <ion-col size="12" class="ion-text-center">
         <ion-text class="title block">Erick Farid González Esquivel</ion-text>
-        <ion-text class="title block">Lizeth A Flores</ion-text>
+        <ion-text class="title block">Lizeth Edith Amado Flores</ion-text>
       </ion-col>
     </ion-row>
     <ion-row class="ion-padding marginTop">
@@ -49,99 +39,4 @@
       </ion-card>
     </ion-row>
   </ion-grid>
-  
-  <!-- <ion-row>
-    <ion-col size="12" *ngFor="let prog of allPrograms">
-      <ion-row>
-        <ion-col size="12">
-          <ion-card *ngIf="files.length" class="analizedCard">
-            <ion-card-header class="ion-text-center">
-              <strong>Programa leído</strong>
-            </ion-card-header>
-            <ion-card-content class="cardWithOverflow" class="ion-justify-content-center">
-              <ion-text class="block" *ngFor="let line of prog">{{ line }}<br></ion-text>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="showOperadoresTable">
-        <ion-card class="widthExp">
-          <ion-grid class="tableGrid">
-            <ion-row class="header">
-              <ion-col>
-                n1
-              </ion-col>
-              <ion-col>
-                OPERADORES
-              </ion-col>
-              <ion-col>
-                N1
-              </ion-col>
-            </ion-row>
-            <ion-row *ngFor="let lin of table" class="rows">
-              <ion-col>
-                {{ lin && lin.address }}
-              </ion-col>
-              <ion-col>
-                {{ lin && lin.symbol }}
-              </ion-col>
-              <ion-col>
-                {{ lin && lin.type }}
-              </ion-col>
-            </ion-row>
-            <ion-row class="header">
-              <ion-col>
-                0
-              </ion-col>
-              <ion-col>
-                TOTAL
-              </ion-col>
-              <ion-col>
-                0
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card>
-      </ion-row>
-      <ion-row *ngIf="showOperandosTable">
-        <ion-card class="widthExp">
-          <ion-grid class="tableGrid">
-            <ion-row class="header">
-              <ion-col>
-                n2
-              </ion-col>
-              <ion-col>
-                OPERANDOS
-              </ion-col>
-              <ion-col>
-                N2
-              </ion-col>
-            </ion-row>
-            <ion-row *ngFor="let lin of table" class="rows">
-              <ion-col>
-                {{ lin && lin.address }}
-              </ion-col>
-              <ion-col>
-                {{ lin && lin.symbol }}
-              </ion-col>
-              <ion-col>
-                {{ lin && lin.type }}
-              </ion-col>
-            </ion-row>
-            <ion-row class="header">
-              <ion-col>
-                0
-              </ion-col>
-              <ion-col>
-                TOTAL
-              </ion-col>
-              <ion-col>
-                0
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card>
-      </ion-row>
-    </ion-col>
-  </ion-row> -->
 </ion-content>

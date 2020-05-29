@@ -27,7 +27,7 @@
     <ion-col size="12" *ngFor="let prog of savedPrograms; let i = index;">
       <ion-row>
         <ion-col size="12">
-          <ion-card class="analizedCard">
+          <ion-card class="analizedCard" (click)="viewProgram(i)">
             <ion-card-header class="ion-text-center">
               <strong *ngIf="savedPrograms.length === 1">Programa #{{(i + 1)}}</strong>
             </ion-card-header>

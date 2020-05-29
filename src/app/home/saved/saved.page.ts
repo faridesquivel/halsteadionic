@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilesService } from 'src/app/providers/files.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-saved',
@@ -9,7 +10,8 @@ import { FilesService } from 'src/app/providers/files.service';
 export class SavedPage implements OnInit {
   savedPrograms = [];
   constructor(
-    private fileService: FilesService
+    private fileService: FilesService,
+    private navController: NavController
   ) { }
 
   async ngOnInit() {
@@ -30,5 +32,10 @@ export class SavedPage implements OnInit {
 
   deleteSaved() {
     this.fileService.deletePrograms();
+  }
+
+  viewProgram(index) {
+    console.log(`Log program ${this.savedPrograms[index]}`);
+    this.navController.navigateForward('/home/tabs/view-program/' + index);
   }
 }

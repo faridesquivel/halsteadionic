@@ -1,30 +1,33 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="home/tabs/saved"
+        color="light"
+      ></ion-back-button>
+    </ion-buttons>
     <ion-title class="ion-text-center">
-      Métricas de Halstead
+      Visualizar Programa
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-row *ngIf="!allPrograms.length">
+  <ion-row *ngIf="!savedProgram.length">
     <ion-col size="12">
       <ion-row>
         <ion-col size="12">
           <ion-card class="analizedCard">
             <ion-card-header class="ion-text-center">
-              <strong>Por favor selecciona un programa en la pestaña <ion-icon color="dark" name="document"></ion-icon></strong>
+              <strong>El programa no ha podido cargarse</strong>
             </ion-card-header>
-            <ion-card-content class="cardWithOverflow" class="ion-justify-content-center">
-              <ion-text class="block">Las analíticas aparecerán aquí cuando selecciones un archivo Python válido</ion-text>
-            </ion-card-content>
           </ion-card>
         </ion-col>
       </ion-row>
     </ion-col>
   </ion-row>
-  <ion-row *ngIf="allPrograms.length">
-    <ion-col size="12" *ngFor="let prog of allPrograms">
+  <ion-row *ngIf="savedProgram.length">
+    <ion-col size="12" *ngFor="let prog of savedProgram">
       <ion-row>
         <ion-card class="widthExp">
           <ion-grid class="tableGrid">
@@ -148,7 +151,6 @@
           </ion-grid>
         </ion-card>
       </ion-row>
-      <ion-button expand="block" (click)="saveProgram(prog)">Guardar Métricas</ion-button>
     </ion-col>
   </ion-row>
 </ion-content>
